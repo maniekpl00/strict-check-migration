@@ -1,0 +1,40 @@
+{
+  "name": "strict-check-migration",
+  "version": "1.0.0",
+  "description": "Scripts used to migrate codebase to strict",
+  "bin": {
+    "strict-check-migration": "./bin/strict-check-migration.js"
+  },
+  "main": "./bin/strict-check-migration.js",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "build": "tsc",
+    "format": "prettier --write \"./lib/**/*.ts\" \"./bin/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A lib",
+    "find-candidates": "tsc && node lib/findCandidates.js",
+    "auto-add": "tsc && node lib/autoAdd.js",
+    "find-cycles": "tsc && node lib/runFindCycles.js",
+    "visualize": "tsc && node lib/visualize.js"
+  },
+  "keywords": [
+    "strict",
+    "null",
+    "checks",
+    "strictnullchecks",
+    "migration"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^8.0.3",
+    "typescript": "4.5.5"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/node": "^16.11.38",
+    "prettier": "^2.6.2"
+  }
+}
